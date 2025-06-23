@@ -7,20 +7,21 @@ type GoogleSignInProps = {
 
 export default function GoogleSignIn({ text }: GoogleSignInProps) {
   const supabase = createClient();
-
+  console.log('Created Supabase client');
   const handleGoogleSignIn = async () => {
+    console.log('Starting Google sign-in');
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
         redirectTo: `${location.origin}/auth/callback`,
       },
     });
-
+    console.log('Finished Google sign-in');
     if (error) {
       console.error('Error signing in with Google:', error);
     }
   };
-
+  console.log('Created Google sign-in handler');
   return (
     <button
       onClick={handleGoogleSignIn}
