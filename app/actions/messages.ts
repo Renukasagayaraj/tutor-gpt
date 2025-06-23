@@ -136,12 +136,12 @@ export async function getMessages(conversationId: string): Promise<Message[]> {
       const {
         data: { user },
       } = await supabase.auth.getUser();
-
+      console.log('Fetched user from Supabase:', { user });
       if (!user) {
         throw new Error('Unauthorized');
       }
       const honchoUser = await getHonchoUser(user.id);
-
+      console.log('Fetched Honcho user:', { honchoUser });
       // First, collect all raw messages
       const rawMessages = [];
       for await (const message of honcho.apps.users.sessions.messages.list(
@@ -152,7 +152,7 @@ export async function getMessages(conversationId: string): Promise<Message[]> {
       )) {
         rawMessages.push(message);
       }
-
+      console.log('Fetched raw messages:', { rawMessages });
       // Build thinking data map using the message sequence
       const thinkingDataMap = await buildThinkingDataMap(
         honchoApp.id,
@@ -186,7 +186,7 @@ export async function getMessages(conversationId: string): Promise<Message[]> {
           });
         }
       });
-
+console.log('Fetched messages:', { messages });
       return messages;
     }
   );

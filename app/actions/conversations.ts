@@ -16,6 +16,7 @@ export async function getConversations() {
       const {
         data: { user },
       } = await supabase.auth.getUser();
+console.log('Fetched user from Supabase:', { user });
 
       if (!user) {
         throw new Error('Unauthorized');
@@ -24,6 +25,8 @@ export async function getConversations() {
       const honchoApp = await getHonchoApp();
       const honchoUser = await getHonchoUser(user.id);
 
+      console.log('Fetched Honcho app and user:', { honchoApp, honchoUser });
+
       const acc = [];
       for await (const convo of honcho.apps.users.sessions.list(
         honchoApp.id,
@@ -31,6 +34,7 @@ export async function getConversations() {
         { is_active: true, reverse: true }
       )) {
         const name = (convo.metadata?.name as string) ?? 'Untitled';
+        console.log('Fetched conversation:', { id: convo.id, name });
         const instance: Conversation = {
           conversationId: convo.id,
           name,

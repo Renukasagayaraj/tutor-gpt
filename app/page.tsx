@@ -11,7 +11,7 @@ export default async function Home() {
   console.log('START Home page rendering');
 
   const supabase = await createClient();
-  console.log('Created Supabase client');
+  console.log('Created Supabase client', supabase);
 
   // Get user session on server
   const {
