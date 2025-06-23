@@ -11,18 +11,21 @@ import { useRouter } from 'next/navigation';
 
 export default function Auth() {
   const [formType, setFormType] = useState('LOGIN');
+  console.log('START Auth page rendering', formType);
   const supabase = createClient();
   // const { theme } = useTheme();
   const router = useRouter();
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data: { user } }) => {
+      console.log('END Auth page rendering', user);
       if (user) {
         // Can't access this page if you're logged in
         router.push('/');
       }
     });
   }, [supabase]);
+
 
   return (
     <section
