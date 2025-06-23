@@ -3,14 +3,14 @@ import { updateSession } from "@/utils/supabase/middleware";
 import { checkBotProtection, checkChatWAF } from "@/utils/arcjet";
 
 export async function middleware(request: NextRequest) {
-  // Skip bot protection for auth and related routes
-  if (
-    request.nextUrl.pathname.startsWith('/auth') ||
-    request.nextUrl.pathname.startsWith('/api/auth') ||
-    request.nextUrl.pathname.startsWith('/favicon.ico')
-  ) {
-    return NextResponse.next();
-  }
+  // // Skip bot protection for auth and related routes
+  // if (
+  //   request.nextUrl.pathname.startsWith('/auth') ||
+  //   request.nextUrl.pathname.startsWith('/api/auth') ||
+  //   request.nextUrl.pathname.startsWith('/favicon.ico')
+  // ) {
+  //   return NextResponse.next();
+  // }
 
   // First, run Arcjet bot protection
   try {
