@@ -21,7 +21,8 @@ export default function Auth() {
       console.log('END Auth page rendering', user);
       if (user) {
         // Can't access this page if you're logged in
-        router.push('/');
+        // router.push('/');
+        router.push(`${location.origin}/auth/callback`);
       }
     });
   }, [supabase]);
