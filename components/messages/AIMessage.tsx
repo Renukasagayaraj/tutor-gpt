@@ -45,6 +45,7 @@ function AIMessage({
       setTimeout(() => setIsCopied(false), 2000);
     }
   };
+console.log('shouldShowThinkBox', shouldShowThinkBox);
 
   return (
     <div className="mb-6">

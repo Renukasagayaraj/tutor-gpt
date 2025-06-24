@@ -414,6 +414,7 @@ What's on your mind? Let's dive in. 🌱`,
       }
     },
   });
+  console.log('messages', messages);
 
   const handleReactionAdded = async (messageId: string, reaction: Reaction) => {
     if (!userId || !conversationId) return;
